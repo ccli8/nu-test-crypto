@@ -1,3 +1,13 @@
 {
-    "macros": ["MBEDTLS_USER_CONFIG_FILE=\"my_mbedtls_config.h\""]
+    "macros": [
+        "MBEDTLS_USER_CONFIG_FILE=\"my_mbedtls_config.h\""
+    ],
+    "target_overrides": {
+        "*": {
+            "rtos.main-thread-stack-size"       : 6144,
+            "platform.stdio-baud-rate"          : 115200,
+            "platform.stdio-convert-newlines"   : true,
+            "platform.stdio-buffered-serial"    : false
+        }
+    }
 }

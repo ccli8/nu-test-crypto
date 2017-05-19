@@ -3,6 +3,8 @@
 
 #include "mbed.h"
 #include "mbedtls/platform.h"
+#include "crypto-misc.h"
+#include "untriaged_utils.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,9 +15,14 @@ extern uint8_t test_buf2[1024];
 extern uint8_t test_buf3[1024];
 #define MAXNUM_LOOP     1000
 
+void test_hexstr_le2be(void);
+
 #if defined(MBEDTLS_AES_C)
 void test_aes(void);
 #endif /* MBEDTLS_AES_C */
+#if defined(MBEDTLS_GCM_C)
+void test_aes_gcm(void);
+#endif /* MBEDTLS_GCM_C */
 #if defined(MBEDTLS_DES_C)
 void test_des(void);
 void test_des_cbc(void);
@@ -42,6 +49,37 @@ void test_sha512_random_updates(void);
 void test_sha512_clone(uint32_t len1, uint32_t len2);
 void test_sha512_perf(int is384);
 #endif /* MBEDTLS_SHA512_C */
+
+#if 1 && defined(MBEDTLS_ECP_C)
+void test_ecp(void);
+
+void test_ecp_secp192r1(void);
+void test_ecp_secp384r1(void);
+void test_ecp_secp521r1(void);
+
+void test_ecp_curve25519(void);
+void test_ecp_curve448(void);
+
+#if 1 && defined(MBEDTLS_ECP_INTERNAL_ALT)
+void test_ecp_internal_secp192r1(void);
+void test_ecp_internal_secp384r1(void);
+void test_ecp_internal_secp521r1(void);
+#endif
+#endif
+
+#if 1 && defined(MBEDTLS_RSA_C)
+void test_rsa(void);
+void test_rsa_v15_1024(void);
+void test_rsa_v15_1536(void);
+void test_rsa_v15_2048(void);
+void test_rsa_v15_3072(void);
+void test_rsa_v15_4096(void);
+void test_rsa_v21_1024(void);
+void test_rsa_v21_1536(void);
+void test_rsa_v21_2048(void);
+void test_rsa_v21_3072(void);
+void test_rsa_v21_4096(void);
+#endif
 
 #ifdef __cplusplus
 }
