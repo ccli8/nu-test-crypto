@@ -3,6 +3,7 @@
 
 #include "mbed.h"
 #include "mbedtls/platform.h"
+#include "crypto-misc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,6 +43,30 @@ void test_sha512_random_updates(void);
 void test_sha512_clone(uint32_t len1, uint32_t len2);
 void test_sha512_perf(int is384);
 #endif /* MBEDTLS_SHA512_C */
+
+#if 1 && defined(MBEDTLS_ECP_C)
+void test_ecp(void);
+void test_ecp_secp192r1(void);
+void test_ecp_secp384r1(void);
+void test_ecp_secp521r1(void);
+void test_ecp_internal_secp192r1(void);
+void test_ecp_internal_secp384r1(void);
+void test_ecp_internal_secp521r1(void);
+#endif
+
+#if 1 && defined(MBEDTLS_RSA_C)
+void test_rsa(void);
+void test_rsa_v15_1024(void);
+void test_rsa_v15_1536(void);
+void test_rsa_v15_2048(void);
+void test_rsa_v15_3072(void);
+void test_rsa_v15_4096(void);
+void test_rsa_v21_1024(void);
+void test_rsa_v21_1536(void);
+void test_rsa_v21_2048(void);
+void test_rsa_v21_3072(void);
+void test_rsa_v21_4096(void);
+#endif
 
 #ifdef __cplusplus
 }

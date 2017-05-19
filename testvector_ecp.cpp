@@ -1,0 +1,1741 @@
+#include "testvector_ecp.h"
+
+#if defined(MBEDTLS_ECP_C)
+
+/* ECC test vector
+ *
+ * http://point-at-infinity.org/ecc/nisttv
+ */
+
+const testvector_ecp_point_t testvector_ecp_secp192r1_G = {
+    "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+    "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+    "1"
+};
+
+const testvector_ecp_point_t testvector_ecp_secp384r1_G = {
+    "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+    "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+    "1"
+};
+
+const testvector_ecp_point_t testvector_ecp_secp521r1_G = {
+    "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+    "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+    "1"
+};
+
+const testvector_ecp_mxG_t testvector_ecp_secp192r1_mxG[] = {
+    /* R = 1*G */
+    {
+        "R = 1*G",
+        /* R = 1*G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* m = 1 */
+        "1",
+    },
+
+    /* R = 2*G */
+    {
+        "R = 2*G",
+        /* R = 2*G */
+        {
+            "DAFEBF5828783F2AD35534631588A3F629A70FB16982A888",
+            "DD6BDA0D993DA0FA46B27BBC141B868F59331AFA5C7E93AB",
+            "1",
+        },
+        /* m = 2 */
+        "2",
+    },
+
+    /* R = 3*G */
+    {
+        "R = 3*G",
+        /* R = 3*G */
+        {
+            "76E32A2557599E6EDCD283201FB2B9AADFD0D359CBB263DA",
+            "782C37E372BA4520AA62E0FED121D49EF3B543660CFD05FD",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "DAFEBF5828783F2AD35534631588A3F629A70FB16982A888",
+            "229425F266C25F05B94D8443EBE4796FA6CCE505A3816C54",
+            "1",
+        },
+        /* m = BigNum */
+        "6277101735386680763835789423176059013767194773182842284079",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "F8E6D46A003725879CEFEE1294DB32298C06885EE186B7EE",
+            "1",
+        },
+        /* m = BigNum */
+        "6277101735386680763835789423176059013767194773182842284080",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_mxG_t testvector_ecp_secp384r1_mxG[] = {
+    /* R = 1*G */
+    {
+        "R = 1*G",
+        /* R = 1*G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* m = 1 */
+        "1",
+    },
+
+    /* R = 2*G */
+    {
+        "R = 2*G",
+        /* R = 2*G */
+        {
+            "08D999057BA3D2D969260045C55B97F089025959A6F434D651D207D19FB96E9E4FE0E86EBE0E64F85B96A9C75295DF61",
+            "8E80F1FA5B1B3CEDB7BFE8DFFD6DBA74B275D875BC6CC43E904E505F256AB4255FFD43E94D39E22D61501E700A940E80",
+            "1",
+        },
+        /* m = 2 */
+        "2",
+    },
+
+    /* R = 3*G */
+    {
+        "R = 3*G",
+        /* R = 3*G */
+        {
+            "077A41D4606FFA1464793C7E5FDC7D98CB9D3910202DCD06BEA4F240D3566DA6B408BBAE5026580D02D7E5C70500C831",
+            "C995F7CA0B0C42837D0BBE9602A9FC998520B41C85115AA5F7684C0EDC111EACC24ABD6BE4B5D298B65F28600A2F1DF1",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "08D999057BA3D2D969260045C55B97F089025959A6F434D651D207D19FB96E9E4FE0E86EBE0E64F85B96A9C75295DF61",
+            "717F0E05A4E4C312484017200292458B4D8A278A43933BC16FB1AFA0DA954BD9A002BC15B2C61DD29EAFE190F56BF17F",
+            "1",
+        },
+        /* m = BigNum */
+        "39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942641",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "C9E821B569D9D390A26167406D6D23D6070BE242D765EB831625CEEC4A0F473EF59F4E30E2817E6285BCE2846F15F1A0",
+            "1",
+        },
+        /* m = BigNum */
+        "39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942642",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_mxG_t testvector_ecp_secp521r1_mxG[] = {
+    /* R = 1*G */
+    {
+        "R = 1*G",
+        /* R = 1*G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* m = 1 */
+        "1",
+    },
+
+    /* R = 2*G */
+    {
+        "R = 2*G",
+        /* R = 2*G */
+        {
+            "00433C219024277E7E682FCB288148C282747403279B1CCC06352C6E5505D769BE97B3B204DA6EF55507AA104A3A35C5AF41CF2FA364D60FD967F43E3933BA6D783D",
+            "00F4BB8CC7F86DB26700A7F3ECEEEED3F0B5C6B5107C4DA97740AB21A29906C42DBBB3E377DE9F251F6B93937FA99A3248F4EAFCBE95EDC0F4F71BE356D661F41B02",
+            "1",
+        },
+        /* m = 2 */
+        "2",
+    },
+
+    /* R = 3*G */
+    {
+        "R = 3*G",
+        /* R = 3*G */
+        {
+            "01A73D352443DE29195DD91D6A64B5959479B52A6E5B123D9AB9E5AD7A112D7A8DD1AD3F164A3A4832051DA6BD16B59FE21BAEB490862C32EA05A5919D2EDE37AD7D",
+            "013E9B03B97DFA62DDD9979F86C6CAB814F2F1557FA82A9D0317D2F8AB1FA355CEEC2E2DD4CF8DC575B02D5ACED1DEC3C70CF105C9BC93A590425F588CA1EE86C0E5",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "00433C219024277E7E682FCB288148C282747403279B1CCC06352C6E5505D769BE97B3B204DA6EF55507AA104A3A35C5AF41CF2FA364D60FD967F43E3933BA6D783D",
+            "010B44733807924D98FF580C1311112C0F4A394AEF83B25688BF54DE5D66F93BD2444C1C882160DAE0946C6C805665CDB70B1503416A123F0B08E41CA9299E0BE4FD",
+            "1",
+        },
+        /* m = BigNum */
+        "6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005447",
+    },
+
+    /* R = BigNum*G */
+    {
+        "R = BigNum*G",
+        /* R = BigNum*G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "00E7C6D6958765C43FFBA375A04BD382E426670ABBB6A864BB97E85042E8D8C199D368118D66A10BD9BF3AAF46FEC052F89ECAC38F795D8D3DBF77416B89602E99AF",
+            "1",
+        },
+        /* m = BigNum */
+        "6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005448",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_mxP_plus_nxQ_t testvector_ecp_secp192r1_mxP_plus_nxQ[] = {
+    /* Add: 3G = 1G + 2G */
+    {
+        "Add: 3G = 1G + 2G",
+        /* R = 3G */
+        {
+            "76E32A2557599E6EDCD283201FB2B9AADFD0D359CBB263DA",
+            "782C37E372BA4520AA62E0FED121D49EF3B543660CFD05FD",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 2G */
+        {
+            "DAFEBF5828783F2AD35534631588A3F629A70FB16982A888",
+            "DD6BDA0D993DA0FA46B27BBC141B868F59331AFA5C7E93AB",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 2G = 1G + 1G */
+    {
+        "Add: 2G = 1G + 1G",
+        /* R = 2G */
+        {
+            "DAFEBF5828783F2AD35534631588A3F629A70FB16982A888",
+            "DD6BDA0D993DA0FA46B27BBC141B868F59331AFA5C7E93AB",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 2G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 10G = 3G + 7G */
+    {
+        "Add: 10G = 3G + 7G",
+        /* R = 10G */
+        {
+            "AA7C4F9EF99E3E96D1AEDE2BD9238842859BB150D1FE9D85",
+            "3212A36547EDC62901EE3658B2F4859460EB5EB2491397B0",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 3G */
+        {
+            "76E32A2557599E6EDCD283201FB2B9AADFD0D359CBB263DA",
+            "782C37E372BA4520AA62E0FED121D49EF3B543660CFD05FD",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 7G */
+        {
+            "8DA75A1F75DDCD7660F923243060EDCE5DE37F007011FCFD",
+            "57CB5FCF6860B35418240DB8FDB3C01DD4B702F96409FFB5",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 20G = 5G + 15G */
+    {
+        "Add: 20G = 5G + 15G",
+        /* R = 20G */
+        {
+            "BB6F082321D34DBD786A1566915C6DD5EDF879AB0F5ADD67",
+            "91E4DD8A77C4531C8B76DEF2E5339B5EB95D5D9479DF4C8D",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 5G */
+        {
+            "10BB8E9840049B183E078D9C300E1605590118EBDD7FF590",
+            "31361008476F917BADC9F836E62762BE312B72543CCEAEA1",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 15G */
+        {
+            "8C9595E63B56B633BA3546B2B5414DE736DE4A9E7578B1E7",
+            "266B762A934F00C17CF387993AA566B6AD7537CDD98FC7B1",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 0G = 1G + (order - 1)G */
+    {
+        "Add: 0G = 1G + (order - 1)G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = (order - 1)G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "F8E6D46A003725879CEFEE1294DB32298C06885EE186B7EE",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Double: 2G = 2*1G */
+    {
+        "Double: 2G = 2*1G",
+        /* R = 2G */
+        {
+            "DAFEBF5828783F2AD35534631588A3F629A70FB16982A888",
+            "DD6BDA0D993DA0FA46B27BBC141B868F59331AFA5C7E93AB",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Double: 18G = 2*9G */
+    {
+        "Double: 18G = 2*9G",
+        /* R = 18G */
+        {
+            "C1B4DB0227210613A6CA15C428024E40B6513365D72591A3",
+            "1E26B286BCA1D08F4FE8F801267DF9FD7782EC3EC3F47F53",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 9G */
+        {
+            "818A4D308B1CABB74E9E8F2BA8D27C9E1D9D375AB980388F",
+            "01D1AA5E208D87CD7C292F7CBB457CDF30EA542176C8E739",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Mul: 1G = 1*1G */
+    {
+        "Mul: 1G = 1*1G",
+        /* R = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 12G = 3*4G */
+    {
+        "Mul: 12G = 3*4G",
+        /* R = 12G */
+        {
+            "1061343F3D456D0ECA013877F8C9E7B28FCCDCDA67EEB8AB",
+            "5A064CAA2EA6B03798FEF8E3E7A48648681EAC020B27293F",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+        /* P = 4G */
+        {
+            "35433907297CC378B0015703374729D7A4FE46647084E4BA",
+            "A2649984F2135C301EA3ACB0776CD4F125389B311DB3BE32",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 20G = 20*1G */
+    {
+        "Mul: 20G = 20*1G",
+        /* R = 20G */
+        {
+            "BB6F082321D34DBD786A1566915C6DD5EDF879AB0F5ADD67",
+            "91E4DD8A77C4531C8B76DEF2E5339B5EB95D5D9479DF4C8D",
+            "1",
+        },
+        /* m = 20 */
+        "20",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: (order - 1)G = (order - 1)*1G */
+    {
+        "Mul: (order - 1)G = (order - 1)*1G",
+        /* R = (order - 1)G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "F8E6D46A003725879CEFEE1294DB32298C06885EE186B7EE",
+            "1",
+        },
+        /* m = (order - 1) */
+        "6277101735386680763835789423176059013767194773182842284080",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 0G = order*1G */
+    {
+        "Mul: 0G = order*1G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = order */
+        "6277101735386680763835789423176059013767194773182842284081",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: -G = -1*1G */
+    {
+        "Mul: -G = -1*1G",
+        /* R = -G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "F8E6D46A003725879CEFEE1294DB32298C06885EE186B7EE",
+            "1",
+        },
+        /* m = -1 */
+        "-1",
+        /* P = 1G */
+        {
+            "188DA80EB03090F67CBF20EB43A18800F4FF0AFD82FF1012",
+            "07192B95FFC8DA78631011ED6B24CDD573F977A11E794811",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* MulAdd: 18G = 2*3G + 3*4G */
+    {
+        "MulAdd: 18G = 2*3G + 3*4G",
+        /* R = 18 */
+        {
+            "C1B4DB0227210613A6CA15C428024E40B6513365D72591A3",
+            "1E26B286BCA1D08F4FE8F801267DF9FD7782EC3EC3F47F53",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 3G */
+        {
+            "76E32A2557599E6EDCD283201FB2B9AADFD0D359CBB263DA",
+            "782C37E372BA4520AA62E0FED121D49EF3B543660CFD05FD",
+            "1",
+        },
+        /* n = 3 */
+        "3",
+        /* Q = 4G */
+        {
+            "35433907297CC378B0015703374729D7A4FE46647084E4BA",
+            "A2649984F2135C301EA3ACB0776CD4F125389B311DB3BE32",
+            "1",
+        },
+        /* Not Crypto ECC H/W operation */
+        false,
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_mxP_plus_nxQ_t testvector_ecp_secp384r1_mxP_plus_nxQ[] = {
+    /* Add: 3G = 1G + 2G */
+    {
+        "Add: 3G = 1G + 2G",
+        /* R = 3G */
+        {
+            "077A41D4606FFA1464793C7E5FDC7D98CB9D3910202DCD06BEA4F240D3566DA6B408BBAE5026580D02D7E5C70500C831",
+            "C995F7CA0B0C42837D0BBE9602A9FC998520B41C85115AA5F7684C0EDC111EACC24ABD6BE4B5D298B65F28600A2F1DF1",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 2G */
+        {
+            "08D999057BA3D2D969260045C55B97F089025959A6F434D651D207D19FB96E9E4FE0E86EBE0E64F85B96A9C75295DF61",
+            "8E80F1FA5B1B3CEDB7BFE8DFFD6DBA74B275D875BC6CC43E904E505F256AB4255FFD43E94D39E22D61501E700A940E80",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 2G = 1G + 1G */
+    {
+        "Add: 2G = 1G + 1G",
+        /* R = 2G */
+        {
+            "08D999057BA3D2D969260045C55B97F089025959A6F434D651D207D19FB96E9E4FE0E86EBE0E64F85B96A9C75295DF61",
+            "8E80F1FA5B1B3CEDB7BFE8DFFD6DBA74B275D875BC6CC43E904E505F256AB4255FFD43E94D39E22D61501E700A940E80",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 10G = 3G + 7G */
+    {
+        "Add: 10G = 3G + 7G",
+        /* R = 10G */
+        {
+            "A669C5563BD67EEC678D29D6EF4FDE864F372D90B79B9E88931D5C29291238CCED8E85AB507BF91AA9CB2D13186658FB",
+            "A988B72AE7C1279F22D9083DB5F0ECDDF70119550C183C31C502DF78C3B705A8296D8195248288D997784F6AB73A21DD",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 3G */
+        {
+            "077A41D4606FFA1464793C7E5FDC7D98CB9D3910202DCD06BEA4F240D3566DA6B408BBAE5026580D02D7E5C70500C831",
+            "C995F7CA0B0C42837D0BBE9602A9FC998520B41C85115AA5F7684C0EDC111EACC24ABD6BE4B5D298B65F28600A2F1DF1",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 7G */
+        {
+            "283C1D7365CE4788F29F8EBF234EDFFEAD6FE997FBEA5FFA2D58CC9DFA7B1C508B05526F55B9EBB2040F05B48FB6D0E1",
+            "9475C99061E41B88BA52EFDB8C1690471A61D867ED799729D9C92CD01DBD225630D84EDE32A78F9E64664CDAC512EF8C",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 20G = 5G + 15G */
+    {
+        "Add: 20G = 5G + 15G",
+        /* R = 20G */
+        {
+            "605508EC02C534BCEEE9484C86086D2139849E2B11C1A9CA1E2808DEC2EAF161AC8A105D70D4F85C50599BE5800A623F",
+            "5158EE87962AC6B81F00A103B8543A07381B7639A3A65F1353AEF11B733106DDE92E99B78DE367B48E238C38DAD8EEDD",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 5G */
+        {
+            "11DE24A2C251C777573CAC5EA025E467F208E51DBFF98FC54F6661CBE56583B037882F4A1CA297E60ABCDBC3836D84BC",
+            "8FA696C77440F92D0F5837E90A00E7C5284B447754D5DEE88C986533B6901AEB3177686D0AE8FB33184414ABE6C1713A",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 15G */
+        {
+            "B3D13FC8B32B01058CC15C11D813525522A94156FFF01C205B21F9F7DA7C4E9CA849557A10B6383B4B88701A9606860B",
+            "152919E7DF9162A61B049B2536164B1BEEBAC4A11D749AF484D1114373DFBFD9838D24F8B284AF50985D588D33F7BD62",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 0G = 1G + (order - 1)G */
+    {
+        "Add: 0G = 1G + (order - 1)G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = (order - 1)G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "C9E821B569D9D390A26167406D6D23D6070BE242D765EB831625CEEC4A0F473EF59F4E30E2817E6285BCE2846F15F1A0",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Double: 2G = 2*1G */
+    {
+        "Double: 2G = 2*1G",
+        /* R = 2G */
+        {
+            "08D999057BA3D2D969260045C55B97F089025959A6F434D651D207D19FB96E9E4FE0E86EBE0E64F85B96A9C75295DF61",
+            "8E80F1FA5B1B3CEDB7BFE8DFFD6DBA74B275D875BC6CC43E904E505F256AB4255FFD43E94D39E22D61501E700A940E80",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Double: 18G = 2*9G */
+    {
+        "Double: 18G = 2*9G",
+        /* R = 18G */
+        {
+            "DFB1FE3A40F7AC9B64C41D39360A7423828B97CB088A4903315E402A7089FA0F8B6C2355169CC9C99DFB44692A9B93DD",
+            "453ACA1243B5EC6B423A68A25587E1613A634C1C42D2EE7E6C57F449A1C91DC89168B7036EC0A7F37A366185233EC522",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 9G */
+        {
+            "8F0A39A4049BCB3EF1BF29B8B025B78F2216F7291E6FD3BAC6CB1EE285FB6E21C388528BFEE2B9535C55E4461079118B",
+            "62C77E1438B601D6452C4A5322C3A9799A9B3D7CA3C400C6B7678854AED9B3029E743EFEDFD51B68262DA4F9AC664AF8",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Mul: 1G = 1*1G */
+    {
+        "Mul: 1G = 1*1G",
+        /* R = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 12G = 3*4G */
+    {
+        "Mul: 12G = 3*4G",
+        /* R = 12G */
+        {
+            "952A7A349BD49289AB3AC421DCF683D08C2ED5E41F6D0E21648AF2691A481406DA4A5E22DA817CB466DA2EA77D2A7022",
+            "A0320FAF84B5BC0563052DEAE6F66F2E09FB8036CE18A0EBB9028B096196B50D031AA64589743E229EF6BACCE21BD16E",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+        /* P = 4G */
+        {
+            "138251CD52AC9298C1C8AAD977321DEB97E709BD0B4CA0ACA55DC8AD51DCFC9D1589A1597E3A5120E1EFD631C63E1835",
+            "CACAE29869A62E1631E8A28181AB56616DC45D918ABC09F3AB0E63CF792AA4DCED7387BE37BBA569549F1C02B270ED67",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 20G = 20*1G */
+    {
+        "Mul: 20G = 20*1G",
+        /* R = 20G */
+        {
+            "605508EC02C534BCEEE9484C86086D2139849E2B11C1A9CA1E2808DEC2EAF161AC8A105D70D4F85C50599BE5800A623F",
+            "5158EE87962AC6B81F00A103B8543A07381B7639A3A65F1353AEF11B733106DDE92E99B78DE367B48E238C38DAD8EEDD",
+            "1",
+        },
+        /* m = 20 */
+        "20",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: (order - 1)G = (order - 1)*1G */
+    {
+        "Mul: (order - 1)G = (order - 1)*1G",
+        /* R = (order - 1)G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "C9E821B569D9D390A26167406D6D23D6070BE242D765EB831625CEEC4A0F473EF59F4E30E2817E6285BCE2846F15F1A0",
+            "1",
+        },
+        /* m = (order - 1) */
+        "39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942642",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 0G = order*1G */
+    {
+        "Mul: 0G = order*1G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = order */
+        "39402006196394479212279040100143613805079739270465446667946905279627659399113263569398956308152294913554433653942643",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: -G = -1*1G */
+    {
+        "Mul: -G = -1*1G",
+        /* R = -G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "C9E821B569D9D390A26167406D6D23D6070BE242D765EB831625CEEC4A0F473EF59F4E30E2817E6285BCE2846F15F1A0",
+            "1",
+        },
+        /* m = -1 */
+        "-1",
+        /* P = 1G */
+        {
+            "AA87CA22BE8B05378EB1C71EF320AD746E1D3B628BA79B9859F741E082542A385502F25DBF55296C3A545E3872760AB7",
+            "3617DE4A96262C6F5D9E98BF9292DC29F8F41DBD289A147CE9DA3113B5F0B8C00A60B1CE1D7E819D7A431D7C90EA0E5F",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* MulAdd: 18G = 2*3G + 3*4G */
+    {
+        "MulAdd: 18G = 2*3G + 3*4G",
+        /* R = 18 */
+        {
+            "DFB1FE3A40F7AC9B64C41D39360A7423828B97CB088A4903315E402A7089FA0F8B6C2355169CC9C99DFB44692A9B93DD",
+            "453ACA1243B5EC6B423A68A25587E1613A634C1C42D2EE7E6C57F449A1C91DC89168B7036EC0A7F37A366185233EC522",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 3G */
+        {
+            "077A41D4606FFA1464793C7E5FDC7D98CB9D3910202DCD06BEA4F240D3566DA6B408BBAE5026580D02D7E5C70500C831",
+            "C995F7CA0B0C42837D0BBE9602A9FC998520B41C85115AA5F7684C0EDC111EACC24ABD6BE4B5D298B65F28600A2F1DF1",
+            "1",
+        },
+        /* n = 3 */
+        "3",
+        /* Q = 4G */
+        {
+            "138251CD52AC9298C1C8AAD977321DEB97E709BD0B4CA0ACA55DC8AD51DCFC9D1589A1597E3A5120E1EFD631C63E1835",
+            "CACAE29869A62E1631E8A28181AB56616DC45D918ABC09F3AB0E63CF792AA4DCED7387BE37BBA569549F1C02B270ED67",
+            "1",
+        },
+        /* Not Crypto ECC H/W operation */
+        false,
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_mxP_plus_nxQ_t testvector_ecp_secp521r1_mxP_plus_nxQ[] = {
+    /* Add: 3G = 1G + 2G */
+    {
+        "Add: 3G = 1G + 2G",
+        /* R = 3G */
+        {
+            "01A73D352443DE29195DD91D6A64B5959479B52A6E5B123D9AB9E5AD7A112D7A8DD1AD3F164A3A4832051DA6BD16B59FE21BAEB490862C32EA05A5919D2EDE37AD7D",
+            "013E9B03B97DFA62DDD9979F86C6CAB814F2F1557FA82A9D0317D2F8AB1FA355CEEC2E2DD4CF8DC575B02D5ACED1DEC3C70CF105C9BC93A590425F588CA1EE86C0E5",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 2G */
+        {
+            "00433C219024277E7E682FCB288148C282747403279B1CCC06352C6E5505D769BE97B3B204DA6EF55507AA104A3A35C5AF41CF2FA364D60FD967F43E3933BA6D783D",
+            "00F4BB8CC7F86DB26700A7F3ECEEEED3F0B5C6B5107C4DA97740AB21A29906C42DBBB3E377DE9F251F6B93937FA99A3248F4EAFCBE95EDC0F4F71BE356D661F41B02",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 2G = 1G + 1G */
+    {
+        "Add: 2G = 1G + 1G",
+        /* R = 2G */
+        {
+            "00433C219024277E7E682FCB288148C282747403279B1CCC06352C6E5505D769BE97B3B204DA6EF55507AA104A3A35C5AF41CF2FA364D60FD967F43E3933BA6D783D",
+            "00F4BB8CC7F86DB26700A7F3ECEEEED3F0B5C6B5107C4DA97740AB21A29906C42DBBB3E377DE9F251F6B93937FA99A3248F4EAFCBE95EDC0F4F71BE356D661F41B02",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 10G = 3G + 7G */
+    {
+        "Add: 10G = 3G + 7G",
+        /* R = 10G */
+        {
+            "0190EB8F22BDA61F281DFCFE7BB6721EC4CD901D879AC09AC7C34A9246B11ADA8910A2C7C178FCC263299DAA4DA9842093F37C2E411F1A8E819A87FF09A04F2F3320",
+            "01EB5D96B8491614BA9DBAEAB3B0CA2BA760C2EEB2144251B20BA97FD78A62EF62D2BF5349D44D9864BB536F6163DC57EBEFF3689639739FAA172954BC98135EC759",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 3G */
+        {
+            "01A73D352443DE29195DD91D6A64B5959479B52A6E5B123D9AB9E5AD7A112D7A8DD1AD3F164A3A4832051DA6BD16B59FE21BAEB490862C32EA05A5919D2EDE37AD7D",
+            "013E9B03B97DFA62DDD9979F86C6CAB814F2F1557FA82A9D0317D2F8AB1FA355CEEC2E2DD4CF8DC575B02D5ACED1DEC3C70CF105C9BC93A590425F588CA1EE86C0E5",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 7G */
+        {
+            "0056D5D1D99D5B7F6346EEB65FDA0B073A0C5F22E0E8F5483228F018D2C2F7114C5D8C308D0ABFC698D8C9A6DF30DCE3BBC46F953F50FDC2619A01CEAD882816ECD4",
+            "003D2D1B7D9BAAA2A110D1D8317A39D68478B5C582D02824F0DD71DBD98A26CBDE556BD0F293CDEC9E2B9523A34591CE1A5F9E76712A5DDEFC7B5C6B8BC90525251B",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 20G = 5G + 15G */
+    {
+        "Add: 20G = 5G + 15G",
+        /* R = 20G */
+        {
+            "018BDD7F1B889598A4653DEEAE39CC6F8CC2BD767C2AB0D93FB12E968FBED342B51709506339CB1049CB11DD48B9BDB3CD5CAD792E43B74E16D8E2603BFB11B0344F",
+            "00C5AADBE63F68CA5B6B6908296959BF0AF89EE7F52B410B9444546C550952D311204DA3BDDDC6D4EAE7EDFAEC1030DA8EF837CCB22EEE9CFC94DD3287FED0990F94",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 5G */
+        {
+            "00652BF3C52927A432C73DBC3391C04EB0BF7A596EFDB53F0D24CF03DAB8F177ACE4383C0C6D5E3014237112FEAF137E79A329D7E1E6D8931738D5AB5096EC8F3078",
+            "015BE6EF1BDD6601D6EC8A2B73114A8112911CD8FE8E872E0051EDD817C9A0347087BB6897C9072CF374311540211CF5FF79D1F007257354F7F8173CC3E8DEB090CB",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = 15G */
+        {
+            "006B6AD89ABCB92465F041558FC546D4300FB8FBCC30B40A0852D697B532DF128E11B91CCE27DBD00FFE7875BD1C8FC0331D9B8D96981E3F92BDE9AFE337BCB8DB55",
+            "01B468DA271571391D6A7CE64D2333EDBF63DF0496A9BAD20CBA4B62106997485ED57E9062C899470A802148E2232C96C99246FD90CC446ABDD956343480A1475465",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Add: 0G = 1G + (order - 1)G */
+    {
+        "Add: 0G = 1G + (order - 1)G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 1 */
+        "1",
+        /* Q = (order - 1)G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "00E7C6D6958765C43FFBA375A04BD382E426670ABBB6A864BB97E85042E8D8C199D368118D66A10BD9BF3AAF46FEC052F89ECAC38F795D8D3DBF77416B89602E99AF",
+            "1",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_ADD
+    },
+
+    /* Double: 2G = 2*1G */
+    {
+        "Double: 2G = 2*1G",
+        /* R = 2G */
+        {
+            "00433C219024277E7E682FCB288148C282747403279B1CCC06352C6E5505D769BE97B3B204DA6EF55507AA104A3A35C5AF41CF2FA364D60FD967F43E3933BA6D783D",
+            "00F4BB8CC7F86DB26700A7F3ECEEEED3F0B5C6B5107C4DA97740AB21A29906C42DBBB3E377DE9F251F6B93937FA99A3248F4EAFCBE95EDC0F4F71BE356D661F41B02",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Double: 18G = 2*9G */
+    {
+        "Double: 18G = 2*9G",
+        /* R = 18G */
+        {
+            "01BC33425E72A12779EACB2EDCC5B63D1281F7E86DBC7BF99A7ABD0CFE367DE4666D6EDBB8525BFFE5222F0702C3096DEC0884CE572F5A15C423FDF44D01DD99C61D",
+            "010D06E999885B63535DE3E74D33D9E63D024FB07CE0D196F2552C8E4A00AC84C044234AEB201F7A9133915D1B4B45209B9DA79FE15B19F84FD135D841E2D8F9A86A",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 9G */
+        {
+            "01585389E359E1E21826A2F5BF157156D488ED34541B988746992C4AB145B8C6B6657429E1396134DA35F3C556DF725A318F4F50BABD85CD28661F45627967CBE207",
+            "002A2E618C9A8AEDF39F0B55557A27AE938E3088A654EE1CEBB6C825BA263DDB446E0D69E5756057AC840FF56ECF4ABFD87D736C2AE928880F343AA0EA86B9AD2A4E",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_DOUBLE
+    },
+
+    /* Mul: 1G = 1*1G */
+    {
+        "Mul: 1G = 1*1G",
+        /* R = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* m = 1*/
+        "1",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 12G = 3*4G */
+    {
+        "Mul: 12G = 3*4G",
+        /* R = 12G */
+        {
+            "01C0D9DCEC93F8221C5DE4FAE9749C7FDE1E81874157958457B6107CF7A5967713A644E90B7C3FB81B31477FEE9A60E938013774C75C530928B17BE69571BF842D8C",
+            "014048B5946A4927C0FE3CE1D103A682CA4763FE65AB71494DA45E404ABF6A17C097D6D18843D86FCDB6CC10A6F951B9B630884BA72224F5AE6C79E7B1A3281B17F0",
+            "1",
+        },
+        /* m = 3 */
+        "3",
+        /* P = 4G */
+        {
+            "0035B5DF64AE2AC204C354B483487C9070CDC61C891C5FF39AFC06C5D55541D3CEAC8659E24AFE3D0750E8B88E9F078AF066A1D5025B08E5A5E2FBC87412871902F3",
+            "0082096F84261279D2B673E0178EB0B4ABB65521AEF6E6E32E1B5AE63FE2F19907F279F283E54BA385405224F750A95B85EEBB7FAEF04699D1D9E21F47FC346E4D0D",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 20G = 20*1G */
+    {
+        "Mul: 20G = 20*1G",
+        /* R = 20G */
+        {
+            "018BDD7F1B889598A4653DEEAE39CC6F8CC2BD767C2AB0D93FB12E968FBED342B51709506339CB1049CB11DD48B9BDB3CD5CAD792E43B74E16D8E2603BFB11B0344F",
+            "00C5AADBE63F68CA5B6B6908296959BF0AF89EE7F52B410B9444546C550952D311204DA3BDDDC6D4EAE7EDFAEC1030DA8EF837CCB22EEE9CFC94DD3287FED0990F94",
+            "1",
+        },
+        /* m = 20 */
+        "20",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: (order - 1)G = (order - 1)*1G */
+    {
+        "Mul: (order - 1)G = (order - 1)*1G",
+        /* R = (order - 1)G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "00E7C6D6958765C43FFBA375A04BD382E426670ABBB6A864BB97E85042E8D8C199D368118D66A10BD9BF3AAF46FEC052F89ECAC38F795D8D3DBF77416B89602E99AF",
+            "1",
+        },
+        /* m = (order - 1) */
+        "6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005448",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: 00G = order*1G */
+    {
+        "Mul: 0G = order*1G",
+        /* R = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* m = order */
+        "6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005449",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* Mul: -G = -1*1G */
+    {
+        "Mul: -G = -1*1G",
+        /* R = -G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "00E7C6D6958765C43FFBA375A04BD382E426670ABBB6A864BB97E85042E8D8C199D368118D66A10BD9BF3AAF46FEC052F89ECAC38F795D8D3DBF77416B89602E99AF",
+            "1",
+        },
+        /* m = -1 */
+        "-1",
+        /* P = 1G */
+        {
+            "00C6858E06B70404E9CD9E3ECB662395B4429C648139053FB521F828AF606B4D3DBAA14B5E77EFE75928FE1DC127A2FFA8DE3348B3C1856A429BF97E7E31C2E5BD66",
+            "011839296A789A3BC0045C8A5FB42C7D1BD998F54449579B446817AFBD17273E662C97EE72995EF42640C550B9013FAD0761353C7086A272C24088BE94769FD16650",
+            "1",
+        },
+        /* n = 0 */
+        "0",
+        /* Q = 0G */
+        {
+            "0",
+            "1",
+            "0",
+        },
+        /* Crypto ECC H/W operation */
+        true,
+        ECCOP_POINT_MUL
+    },
+
+    /* MulAdd: 18G = 2*3G + 3*4G */
+    {
+        "MulAdd: 18G = 2*3G + 3*4G",
+        /* R = 18 */
+        {
+            "01BC33425E72A12779EACB2EDCC5B63D1281F7E86DBC7BF99A7ABD0CFE367DE4666D6EDBB8525BFFE5222F0702C3096DEC0884CE572F5A15C423FDF44D01DD99C61D",
+            "010D06E999885B63535DE3E74D33D9E63D024FB07CE0D196F2552C8E4A00AC84C044234AEB201F7A9133915D1B4B45209B9DA79FE15B19F84FD135D841E2D8F9A86A",
+            "1",
+        },
+        /* m = 2*/
+        "2",
+        /* P = 3G */
+        {
+            "01A73D352443DE29195DD91D6A64B5959479B52A6E5B123D9AB9E5AD7A112D7A8DD1AD3F164A3A4832051DA6BD16B59FE21BAEB490862C32EA05A5919D2EDE37AD7D",
+            "013E9B03B97DFA62DDD9979F86C6CAB814F2F1557FA82A9D0317D2F8AB1FA355CEEC2E2DD4CF8DC575B02D5ACED1DEC3C70CF105C9BC93A590425F588CA1EE86C0E5",
+            "1",
+        },
+        /* n = 3 */
+        "3",
+        /* Q = 4G */
+        {
+            "0035B5DF64AE2AC204C354B483487C9070CDC61C891C5FF39AFC06C5D55541D3CEAC8659E24AFE3D0750E8B88E9F078AF066A1D5025B08E5A5E2FBC87412871902F3",
+            "0082096F84261279D2B673E0178EB0B4ABB65521AEF6E6E32E1B5AE63FE2F19907F279F283E54BA385405224F750A95B85EEBB7FAEF04699D1D9E21F47FC346E4D0D",
+            "1",
+        },
+        /* Not Crypto ECC H/W operation */
+        false,
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_ecdsa_t testvector_ecp_secp192r1_ecdsa[] = {
+    /* ECDSA #1 */
+    {
+        /* Item name */
+        "ECDSA #1",
+        /* Message */
+        "66e98a165854cd07989b1ee0ec3f8dbe0ee3c2fb0051ef53a0be03457c4f21bce7dc50ef4df37486c3207dfee26bde4ed62340cbb2da784906b1b783b4d601bdff4ae1a7e5e85a85afa3208dc60f0990c823bedddb3db663426665152ed7b093d6bda506c93a694b83ac71553f31f5cc0d6ba2fa248090e8796573c4915d1586",
+        /* Private key */
+        "0017899949d02b55f9556846411cc9de512c6f16ecdeb1c4",
+        /* Public key */
+        {
+            "14f69738599689f5706ab71343becc886ef1569a2d1137fe",
+            "0cf5a433909e33217fb4df6b9593f71d43fb1c2a5653b763",
+            "1",
+        },
+        /* Random value */
+        "0098e9c07e8e6adb97b77d85b0c10a265e11737a89a3e37b",
+        /* First part of signature (r, s) */
+        "af1f749e3df6220ff04efd178618a977e0838b1b9dc126e3",
+        /* Second part of Signature (r, s) */
+        "8990a04c6cc0ff26264ecf8f7831381a9dbc6e53cc8cc860",
+    },
+
+    /* ECDSA #2 */
+    {
+        /* Item name */
+        "ECDSA #2",
+        /* Message */
+        "d39ad56135bec4c3c4362d59d3d9175acb386670c5db0a1757ce7646ad5d5352dc1b760f7429103854b42511c3c0404abc24642788d645de9369b84178d4699c5e75cce18756560226aeec9f71ab9ce1f86e8ba635582ede6484bd349594e5f2ffb1be1e97cdfce9e12b694b062293e7281ec134f2e72cde73266c6a2c25311a",
+        /* Private key */
+        "0064c3a51fb6188170f3cdf12b474a77de4ae0052b84ece8",
+        /* Public key */
+        {
+            "386afa71afc065019f3d2021ead531ed1d365887122d2d4b",
+            "bbfb6e9cdb32c2252015acfb4cfb049b08b4cb279c64928a",
+            "1",
+        },
+        /* Random value */
+        "00797552b9abf541c886f93556103b817a46c9aa0e2bc86f",
+        /* First part of signature (r, s) */
+        "337be42eebdcedd97678eeaae9d1b231b740a191a293c22a",
+        /* Second part of Signature (r, s) */
+        "9d6766b391e95f649e05442453a85466da29eaa97ddcfc62",
+    },
+
+    /* ECDSA #3 */
+    {
+        /* Item name */
+        "ECDSA #3",
+        /* Message */
+        "477101daa282a5a55b48c5313290c8da65b07cc4d41a5a1463300c60a05a2c63a6564ff641d0423c5233931c75be53f4e2da1b8b91ab4d48a2e59ca2fbe1cfd833f0c1e2afefada70a1ba870ba276f9df18c6397c221d20585eb78437c36460fb7e4628634066e504ba90d1749f2a33d5c6e5dceafa372b3d5eba8296b821972",
+        /* Private key */
+        "00abd205ef412646907d2e4886b8ffd7d94678bd3818ed54",
+        /* Public key */
+        {
+            "3b1c19d73b6a4d7a12003530a54ae0f5ba18d75c98a0db95",
+            "afb8bd8c94c6e3d5dc050e3641c0fad771557ce97f5f3dba",
+            "1",
+        },
+        /* Random value */
+        "00b81567f9e19c4ace373a26337488c1a476b7ee8d8e52bf",
+        /* First part of signature (r, s) */
+        "e36d5dbb9560d959814cbd30aa6a405da9652fbd250da9ab",
+        /* Second part of Signature (r, s) */
+        "f2db3d62733f6d08b08ef0682f579ac527950117f39e474b",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_ecdsa_t testvector_ecp_secp384r1_ecdsa[] = {
+    /* ECDSA #1 */
+    {
+        /* Item name */
+        "ECDSA #1",
+        /* Message */
+        "4c06491c039e8a819bbcbd80152d0cedfe1a8cd6448ab81e48281f68344759368f233f520f695c6eaefa9e07ffec518fc3d24ecab83e7079b1844836ebc0129f9f1ae7b6d448348877556a0dada1f750682a76cf39092225654091e63ab29fcba373a80ffb42fa181f54895ac754e57916a76aad6ff4b66b8be46142c826e803",
+        /* Private key */
+        "0082757d5b9db084bd2e0921a6ce621076f3f43a523565a76710c9a1dcc7c5f4b1a4237f24c53614153ed97b423a2777",
+        /* Public key */
+        {
+            "3271938d4cd144006b45c73f2a8930dff8238e7220496000be3694aa5418063271c2e12912b6c1cbc03c4175373c3a3e",
+            "d34f5257d230a464958d1fff570a2f55fe6401c83a613a53389a82957eaa639e3898cfe9823d57b38baee30f5c94f7e1",
+            "1",
+        },
+        /* Random value */
+        "003d87d4516517e73854719d4ba3ecc1c6f90e1438b540c628f22d177b7bff158f6dc5b11d20ac390a57516f061c25b4",
+        /* First part of signature (r, s) */
+        "a8929784c43fa3d11e3169616131a961c880ba7442cadcab6df98744db7d1ec0150a5e345cc1499db71ed7175db2954d",
+        /* Second part of Signature (r, s) */
+        "56ddef0b15a8804b08909e6696581b7d5a3aba1c7d280c7486bc264a246354470d803eac034bbe0dc9e78a742c83160f",
+    },
+
+    /* ECDSA #2 */
+    {
+        /* Item name */
+        "ECDSA #2",
+        /* Message */
+        "9db0c2582441d8fad4b52f1f29a8c264a0b299421c3b4a868791c002bc373b83a5819803a05dd31f2874cacbb1724344d3a13146abbd33807f045e45a08c3c8495d914fa75af6ca69525cd7d63fbc660922d334b78c8c0cfb4fda8c21374c335b5e3bfa66bdead7764f1c09f09ec52a0257e28b94905f75c6fa527e2dd97d67e",
+        /* Private key */
+        "0073046c07df4a1dbfbab19c248b8c2b5c27e5864ad44be34df47678de5b9cbdc7473be95258fb4320fd7003156284fc",
+        /* Public key */
+        {
+            "2438dfad2b996d6eadf97845dcc2e686d8c548430770b81ef9af84d7aee55cbd14eb84fcce7e3c5e9019d21b1dbb5897",
+            "b3a0ee8e9095701892f737099a74c7dee3505e87be8dbea4bf1ea555f93d448fdeef509d9b6795f84d6d9ac09c9ba812",
+            "1",
+        },
+        /* Random value */
+        "002ec0faebc17e7fa2dcdbc11a94049022b2cdc2afce60428a97206fb3f35194d75e7b1d305a3069e590b13800256bc1",
+        /* First part of signature (r, s) */
+        "f6b7bb082f6775751e123c67548aafc344ce689b63b7bd3b6b349be16e19da9b9dac4e424ac646c0f244d6bc516d30ac",
+        /* Second part of Signature (r, s) */
+        "5b95574d2f2c99efe9bb1bbeeada2d1742d4fffff21102147707629490765ee4513a909ea7a405ce84022fbdde7726c8",
+    },
+
+    /* ECDSA #3 */
+    {
+        /* Item name */
+        "ECDSA #3",
+        /* Message */
+        "d4e12e9a4a9128caa01d197c41555e24216e2abca15487bab341973f3e8f2091c4cb47cb420a9cd35780578da94ee14e859c9794c5e8caf4f79d0a53bbe8a4596dc769230463b1383a9fa0bfeef1a8efc6714fc6182f33fe0bca4b3df93e6f8c18fe1b0a5a4370e191a37b7ad7e5baed2d14dcbc62d2c9c037efe263c03a8a10",
+        /* Private key */
+        "00f364a5726d996f6dd8d63722e8bf54fced1e5dc06734efffc4df4658a88014e151d2049f284cbf32b4fdc09d0ecaf4",
+        /* Public key */
+        {
+            "8bb63ea0439481f697142c898670ce2754e04f3bae955ba5f45ce9bc2d24553abbb8a358339c257fdc397ab158767b7a",
+            "c85c9c73c31d4e105d4e8f1e6a93cb39a4db39d578aea5a3ac042bae2893485a27eb236d0fa1e3e675ea291901ead2e2",
+            "1",
+        },
+        /* Random value */
+        "00040825897316c3c233a99b9b75c1017c97f25770a6384c7b45e5cb8a0db87941b1e193362e9fc6971480c111939ecc",
+        /* First part of signature (r, s) */
+        "61d9464f89d00c77c4271978dcec8e7ed2b371a559101ec6a2e39a36e5fbe3bc220eadffa18ff36f74f3b16e055277a5",
+        /* Second part of Signature (r, s) */
+        "f9bcc99715831b63321ca24bd123339c72b397927e53328f9fb32119da232a98b3fcf8908cfa62310c526bf17f8d61f6",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+const testvector_ecp_ecdsa_t testvector_ecp_secp521r1_ecdsa[] = {
+    /* ECDSA #1 */
+    {
+        /* Item name */
+        "ECDSA #1",
+        /* Message */
+        "cc92ca36a76760752b5a45ca5d7235947122a6002f1d4e7d9c6be570d7bd2c2941fe2e16e02ac637066361d22d420568266b93e773644921f1a78a7dbaf5e2ed49ee4520dfdf97f826db723e140d2395134cf5ac5ff0b3b8afe4682217fd697c2d8a95ba6b2ddc9fd4e9fe75da7b950180ee56b6bc6a94291f4d05c5b77cc9c0",
+        /* Private key */
+        "03d72bcc700695d400c813dfda1e3b3bf2cbc15f28d272dcb3bd7f935fdabac9c277dc47a3245737b40ded8d0d2464caa6afa8b971693cb258a8f58e63fab2c4856",
+        /* Public key */
+        {
+            "0f1dc7ccb09d61e6af379b89aca905b49779fbe43a94c8ef384ccbf660f4805c965a3a24ed5a962c24809415cdecfdfe50fd18f1266073154b62f355fe4c98af6e5",
+            "1740eb95b8e31a0434c988f2edd550b8dc6c45c6f504309255370cce57e821fcb4f60bad17a8fb9a3f4dc67ed4860ae6dd3ed4b1f51b98451b7e7095cc87d4d6279",
+            "1",
+        },
+        /* Random value */
+        "1fc81abec3fab91a439df81eb49a7179230866c2e0e505d696ca37972e4af043f6ce6edea69c5711d14c43905b3dcc9ed48d225d50d8b136b6f0787215b3500be53",
+        /* First part of signature (r, s) */
+        "0d314dde74cce6024518980ad85cc7d5a294e148fa26f0648486a6d2882ca7a92a1c934c4b01ee1f6cc1dcc5920d49719a1823cfa32a69cda710b0e95623bbb0451",
+        /* Second part of Signature (r, s) */
+        "14b0b93bda137a5293900eb6cb6b151e3301b8e2944eaee5ce0f8df87c9841b61372a2d70e775c6758d29a7d24f62c69dc884b54ce67a8edb51a072e4797a9b036d",
+    },
+
+    /* ECDSA #2 */
+    {
+        /* Item name */
+        "ECDSA #2",
+        /* Message */
+        "7a32e2334f404d734d4c54223cd0162d63c738fb9c6b9350ae432972d65d5e8ba7d9654f15a7f8decc904cecc67b441f1ce9e5b81cc30a769d5558b78f9a75e1d6ba750059d195b155f22c3ef86cde0a2b4b1330af22a7676b08e42904e1ad14afdffb9043488eb29379dc60fa2b4eb637f5aba97b12d4eac165b30d5eba6eeb",
+        /* Private key */
+        "18052673fd91a37448f1f33ad88526ef738f22e6476256dab6c7448371e60850da9d738ab9f3e402061ee95abb70436d282d3e8e63595d4ddfacf94d53b3af5d348",
+        /* Public key */
+        {
+            "062a005d80ec3ee67c1c184eb2efe8d1063e81eb2f919357bb442052d977d143dd7ca9be43f624028b7f8c82422e5fdf63d19f2cea7e2a4f6678a57165a1c45aa34",
+            "1724cb834d5383a189ccf7f372f16694af1dbafadb3f569d34d2ed54d70aab106bbbf041f539dae97c6efa35d41b390b1ad751eed2c0d838784111bb562de9beb72",
+            "1",
+        },
+        /* Random value */
+        "160bcb5a661ffb58dda4110a003e83623e5eecf39de285fd8c79674a40cd89959a04936aa0288ef7e8d6621f882b5c8ab3eca58bb3ba48919087313def041433339",
+        /* First part of signature (r, s) */
+        "021bca796dafa1cb5bfbdc3fd70787ed6405d418a12e224b34d9516b89e29a486607bb7d51f6823b585579f33a86f6a6b31197e7dd16744e90716a7dc947ac96930",
+        /* Second part of Signature (r, s) */
+        "0c426dde552bb1c56bba173930bd547639ac8bc752f762eaaf8924a8ae5f646ca93ae46488ead0f3758e787f23795920af0263950f83c73f5994b7f4ad68232866c",
+    },
+
+    /* ECDSA #3 */
+    {
+        /* Item name */
+        "ECDSA #3",
+        /* Message */
+        "d7f34b6df5439df3355145c2b160ca56c6ea111418937edbd65b5cdd40177fad6622279832502839a82348486d42e9b38626e8f06317c4911c570319fa9dd10e39c4eb4f0cc5bba8e2e3c4a4e82541a2cf09092bcf77b683ecf4067e78188295d9425d398c8a9e686af7827d2af31b4c28fb3e6e649b9cdace9a2fb5c172d86c",
+        /* Private key */
+        "10eaea9314df09f87f6d89607242dfeb25f2063cdeb504ecd01ffa6e22dabc05878ba56cd7b5438409d2e6478e103a3e7ef4fa87996c7951556c138099018169c65",
+        /* Public key */
+        {
+            "0d2ec1ed013cc9275c04a8ddbea6168d92e522aae42002c3b0ff10086b21671d6d5e085e95d411ac971fc574a93d994431d621e67fb3ee4599b7dd7d489d0c84ba6",
+            "056453c783ab46f553c6eae03c46d4f4463c61c4caade1b583c3c82891f2fda1717351f7d24ff718ef7b3f02b39f2bd97f9d03ad08d05a2eaedb0590d941f776001",
+            "1",
+        },
+        /* Random value */
+        "1ee6d3bc2a6f7806bbb8e6993ff5a5cd2c4e34eac96d499814a387e88a3af15cfa251361fe02d376b8952f01c701246eaa1cdb6c40ef9537db1d9764c23242a0712",
+        /* First part of signature (r, s) */
+        "0e77d338c3241620989a4d178b851bd6c8dd0667002c2fee603dd2bbee19f572d2d479c63ed41eeb95988cb8faa912342f546f0445edb158b0f2c6d7aee4b37a741",
+        /* Second part of Signature (r, s) */
+        "102394e3536a9d4c59e8ffa1945c07beebf535cd3ea001a4c3109d7db6b11f3c89403c49e06d50db4aaa9e52e32b9dd4d3cf4fedb5e72808fdc5b14d6c4d2919d96",
+    },
+
+    /* End with empty name */
+    {
+        "",
+    },
+};
+
+#endif /* MBEDTLS_ECP_C */
