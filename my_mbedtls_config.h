@@ -7,6 +7,9 @@
 
 #define MBEDTLS_AES_C
 
+#define MBEDTLS_CIPHER_MODE_CTR
+#define MBEDTLS_CIPHER_MODE_CFB
+
 #elif defined(TARGET_NUMAKER_PFM_M487)
 
 #define MBEDTLS_DES_C
@@ -16,5 +19,8 @@
 #define MBEDTLS_SHA512_C
 
 #define MBEDTLS_AES_C
+
+#define MBEDTLS_CIPHER_MODE_CTR
+#define MBEDTLS_CIPHER_MODE_CFB
 
 #endif
