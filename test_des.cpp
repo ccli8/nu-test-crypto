@@ -1,5 +1,6 @@
 #include "mbed.h"
 #include "mbedtls/des.h"
+#include "des_alt_sw.h"
 
 #include "test_crypto_cm.h"
 
