@@ -165,4 +165,19 @@ int main() {
     test_sha512_clone(128, 65);
     test_sha512_clone(128, 128);
 #endif
+
+#if 1 && defined(MBEDTLS_ECP_C)
+    test_ecp();
+    test_ecp_secp192r1();
+    test_ecp_secp384r1();
+    test_ecp_secp521r1();
+    
+#if defined(MBEDTLS_ECP_INTERNAL_ALT)
+    /* Test add/double/mul with R = m*P + n*Q */
+    test_ecp_secp192r1_internal();
+    test_ecp_secp384r1_internal();
+    test_ecp_secp521r1_internal();
+#endif  /* MBEDTLS_ECP_INTERNAL_ALT */
+
+#endif
 }

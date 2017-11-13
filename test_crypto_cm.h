@@ -43,6 +43,16 @@ void test_sha512_clone(uint32_t len1, uint32_t len2);
 void test_sha512_perf(int is384);
 #endif /* MBEDTLS_SHA512_C */
 
+#if 1 && defined(MBEDTLS_ECP_C)
+void test_ecp(void);
+void test_ecp_secp192r1(void);
+void test_ecp_secp384r1(void);
+void test_ecp_secp521r1(void);
+void test_ecp_secp192r1_internal(void);
+void test_ecp_secp384r1_internal(void);
+void test_ecp_secp521r1_internal(void);
+#endif
+
 #ifdef __cplusplus
 }
 #endif
