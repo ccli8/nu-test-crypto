@@ -1165,14 +1165,9 @@ static void test_ecp_secp_sub_internal(mbedtls_ecp_group_id id,
             } else {
                 MBEDTLS_MPI_CHK(mbedtls_ecp_point_read_string(&Q, 16, mxP_plus_nxQ->Q.x, mxP_plus_nxQ->Q.y));
             }
-            
-            /* Run R = m*P + n*Q */
-            if (mxP_plus_nxQ->eccop == ECCOP_POINT_MUL && mbedtls_mpi_cmp_int(&m, 0) < 0) {
-                MBEDTLS_MPI_CHK(mbedtls_internal_ecp_mul(&grp, &mP_plus_nQ, &m, &P));
-            } else {
-                MBEDTLS_MPI_CHK(mbedtls_internal_run_eccop(&grp, &mP_plus_nQ, &m, &P, &n, &Q, mxP_plus_nxQ->eccop));
-            }
-            
+
+            MBEDTLS_MPI_CHK(mbedtls_internal_run_eccop(&grp, &mP_plus_nQ, &m, &P, &n, &Q, mxP_plus_nxQ->eccop));
+
             /* Verify the result */
             MBEDTLS_MPI_CHK(mbedtls_ecp_point_cmp(&R, &mP_plus_nQ));
             
