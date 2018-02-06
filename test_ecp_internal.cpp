@@ -18,8 +18,11 @@ extern "C" {
     int mbedtls_internal_ecp_mul(mbedtls_ecp_group *grp,
                             mbedtls_ecp_point *R,
                             const mbedtls_mpi *m,
-                            const mbedtls_ecp_point *P);
-    int mbedtls_internal_run_eccop(const mbedtls_ecp_group *grp,
+                            const mbedtls_ecp_point *P);                            
+    int mbedtls_internal_ecp_normalize_jac( const mbedtls_ecp_group *grp,
+        mbedtls_ecp_point *pt );
+
+    int internal_run_eccop(const mbedtls_ecp_group *grp,
                                 mbedtls_ecp_point *R,
                                 const mbedtls_mpi *m,
                                 const mbedtls_ecp_point *P,
@@ -27,7 +30,48 @@ extern "C" {
                                 const mbedtls_ecp_point *Q,
                                 uint32_t eccop);
 }
-                
+               
+/**
+ * \brief           Point multiplication R = m*P, Jacobian coordinates.
+ *
+ * \param grp       Pointer to the group representing the curve.
+ *
+ * \param R         Pointer to a point structure to hold the result.
+ *
+ * \param m         Pointer to MPI by which to multiply P
+ *
+ * \param P         Pointer to the point that has to be multiplied by m, given with
+ *                  Jacobian coordinates.
+ *
+ * \return          0 if successful.
+ *
+ * \note            Currently mbedTLS doesn't open R = m*P API like this.
+ *                  It is expected because ECC accelerator can improve it by 30~40 times.
+ */
+int mbedtls_internal_ecp_mul_jac(mbedtls_ecp_group *grp,
+                            mbedtls_ecp_point *R,
+                            const mbedtls_mpi *m,
+                            const mbedtls_ecp_point *P)
+{
+    int ret;
+    mbedtls_ecp_point P_;
+    
+    mbedtls_ecp_point_init(&P_);
+    
+    /* P_ = normalized P */
+    MBEDTLS_MPI_CHK(mbedtls_ecp_copy(&P_, P));
+    MBEDTLS_MPI_CHK(mbedtls_internal_ecp_normalize_jac(grp, &P_));
+        
+    /* Run ECC point multiplication: R = m*P */
+    MBEDTLS_MPI_CHK(internal_run_eccop(grp, R, m, &P_, NULL, NULL, ECCOP_POINT_MUL));
+
+cleanup:
+
+    mbedtls_ecp_point_free(&P_);
+
+    return ret;
+}
+               
 typedef struct {
     char    x[140];
     char    y[140];
@@ -1166,7 +1210,7 @@ static void test_ecp_secp_sub_internal(mbedtls_ecp_group_id id,
                 MBEDTLS_MPI_CHK(mbedtls_ecp_point_read_string(&Q, 16, mxP_plus_nxQ->Q.x, mxP_plus_nxQ->Q.y));
             }
 
-            MBEDTLS_MPI_CHK(mbedtls_internal_run_eccop(&grp, &mP_plus_nQ, &m, &P, &n, &Q, mxP_plus_nxQ->eccop));
+            MBEDTLS_MPI_CHK(internal_run_eccop(&grp, &mP_plus_nQ, &m, &P, &n, &Q, mxP_plus_nxQ->eccop));
 
             /* Verify the result */
             MBEDTLS_MPI_CHK(mbedtls_ecp_point_cmp(&R, &mP_plus_nQ));

@@ -40,3 +40,5 @@
 #define MBEDTLS_ECP_DP_SECP521R1_ENABLED
 
 #endif
+
+#define NU_CRYPTO_SELF_TEST     1
