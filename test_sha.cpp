@@ -216,7 +216,7 @@ void test_sha256_random_updates(void)
     size_t update_sizes[] = {64, 128, 1, 3, 4, 53, 1, 63, 2, 61, 64, 128, 255};
 
     for (j = 0; j < sizeof (test_buf1); j ++) {
-        test_buf3[j] = (j * j) & 0xFF;
+        test_buf1[j] = (j * j) & 0xFF;
     }
     
     mbedtls_sha256_init(&ctx1);
@@ -379,7 +379,7 @@ void test_sha512_random_updates(void)
     size_t update_sizes[] = {64, 128, 1, 3, 4, 53, 1, 63, 2, 61, 64, 128, 255};
 
     for (j = 0; j < sizeof (test_buf1); j ++) {
-        test_buf3[j] = (j * j) & 0xFF;
+        test_buf1[j] = (j * j) & 0xFF;
     }
     
     mbedtls_sha512_init(&ctx1);
