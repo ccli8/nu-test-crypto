@@ -128,21 +128,21 @@ static void test_rsa_sub(const testvector_rsa_t *tstit)
     t.start();
 
     MBEDTLS_MPI_CHK(tstit->keybits == (rsa.len * 8) ? 0 : MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED);
-    printf("N (modulus): %d bits (%d bytes)\n\n", rsa.len * 8, rsa.len);
+    //printf("N (modulus): %d bits (%d bytes)\n\n", rsa.len * 8, rsa.len);
 
     /* Dump key context */
     MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&rsa.N, 16, ctxkey_hexstr, sizeof(ctxkey_hexstr), &ctxkey_hexstr_len));
-    printf("N: \n%s\n", ctxkey_hexstr);
+    //printf("N: \n%s\n", ctxkey_hexstr);
     MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&rsa.E, 16, ctxkey_hexstr, sizeof(ctxkey_hexstr), &ctxkey_hexstr_len));
-    printf("E: \n%s\n", ctxkey_hexstr);
+    //printf("E: \n%s\n", ctxkey_hexstr);
     MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&rsa.D, 16, ctxkey_hexstr, sizeof(ctxkey_hexstr), &ctxkey_hexstr_len));
-    printf("D: \n%s\n", ctxkey_hexstr);
+    //printf("D: \n%s\n", ctxkey_hexstr);
     MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&rsa.P, 16, ctxkey_hexstr, sizeof(ctxkey_hexstr), &ctxkey_hexstr_len));
-    printf("P: \n%s\n", ctxkey_hexstr);
+    //printf("P: \n%s\n", ctxkey_hexstr);
     MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&rsa.Q, 16, ctxkey_hexstr, sizeof(ctxkey_hexstr), &ctxkey_hexstr_len));
-    printf("Q: \n%s\n", ctxkey_hexstr);
+    //printf("Q: \n%s\n", ctxkey_hexstr);
 
-    printf("\n");
+    //printf("\n");
 
     tstsig = &(tstit->sig_arr[0]);
 
@@ -195,8 +195,8 @@ static void test_rsa_sub(const testvector_rsa_t *tstit)
 #if 1
             MBEDTLS_MPI_CHK(mbedtls_mpi_read_binary(&K, sig_act_bin, rsa.len));
             MBEDTLS_MPI_CHK(mbedtls_mpi_write_string(&K, 16, sig_act_hexstr, sizeof(sig_act_hexstr), &sig_act_hexstr_len));
-            printf("  Sig (EXP): \n%s\n", tstsig->sig);
-            printf("  Sig (ACT): \n%s\n", sig_act_hexstr);
+            //printf("  Sig (EXP): \n%s\n", tstsig->sig);
+            //printf("  Sig (ACT): \n%s\n", sig_act_hexstr);
 #endif
             MBEDTLS_MPI_CHK(mbedtls_mpi_read_string(&K, 16, tstsig->sig));
             MBEDTLS_MPI_CHK(mbedtls_mpi_write_binary(&K, sig_exp_bin, rsa.len));

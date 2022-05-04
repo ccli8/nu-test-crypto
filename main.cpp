@@ -168,13 +168,13 @@ int main() {
     test_sha512_perf(1);
 #endif
 
-#if 1 && defined(MBEDTLS_ECP_C)
+#if 0 && defined(MBEDTLS_ECP_C)
     test_ecp();
     test_ecp_secp192r1();
     test_ecp_secp384r1();
     test_ecp_secp521r1();
 
-#if 1 && defined(MBEDTLS_ECP_INTERNAL_ALT)
+#if 0 && defined(MBEDTLS_ECP_INTERNAL_ALT)
     /* Test add/double/mul with R = m*P + n*Q */
     test_ecp_internal_secp192r1();
     test_ecp_internal_secp384r1();
@@ -183,19 +183,21 @@ int main() {
 
 #endif /* MBEDTLS_ECP_C */
 
-#if 0 && defined(MBEDTLS_RSA_C)
-    test_rsa();
+#if 1 && defined(MBEDTLS_RSA_C)
+    //test_rsa();
     test_rsa_v15_1024();
-    test_rsa_v15_1536();
-    test_rsa_v15_2048();
-    test_rsa_v15_3072();
-    test_rsa_v15_4096();
-    test_rsa_v21_1024();
-    test_rsa_v21_1536();
-    test_rsa_v21_2048();
-    test_rsa_v21_3072();
-    test_rsa_v21_4096();
+    //test_rsa_v15_1536();
+    //test_rsa_v15_2048();
+    //test_rsa_v15_3072();
+    //test_rsa_v15_4096();
+    //test_rsa_v21_1024();
+    //test_rsa_v21_1536();
+    //test_rsa_v21_2048();
+    //test_rsa_v21_3072();
+    //test_rsa_v21_4096();
 #endif /* MBEDTLS_RSA_C */
 
     printf("nu-crypto ... END\n\n");
+    
+    while (1);
 }
