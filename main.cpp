@@ -44,6 +44,10 @@ int main() {
     test_aes();
 #endif
 
+#if 1 && defined(MBEDTLS_GCM_C)
+    test_aes_gcm();
+#endif
+
 #if 0 && defined(MBEDTLS_DES_C)
     test_des();
     test_des_cbc();
@@ -168,13 +172,13 @@ int main() {
     test_sha512_perf(1);
 #endif
 
-#if 1 && defined(MBEDTLS_ECP_C)
+#if 0 && defined(MBEDTLS_ECP_C)
     test_ecp();
     test_ecp_secp192r1();
     test_ecp_secp384r1();
     test_ecp_secp521r1();
 
-#if 1 && defined(MBEDTLS_ECP_INTERNAL_ALT)
+#if 0 && defined(MBEDTLS_ECP_INTERNAL_ALT)
     /* Test add/double/mul with R = m*P + n*Q */
     test_ecp_internal_secp192r1();
     test_ecp_internal_secp384r1();

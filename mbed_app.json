@@ -4,6 +4,7 @@
     ],
     "target_overrides": {
         "*": {
+            "rtos.main-thread-stack-size"       : 6144,
             "platform.stdio-baud-rate"          : 115200,
             "platform.stdio-convert-newlines"   : true,
             "platform.stdio-buffered-serial"    : false

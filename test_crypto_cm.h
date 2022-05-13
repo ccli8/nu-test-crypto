@@ -17,6 +17,9 @@ extern uint8_t test_buf3[1024];
 #if defined(MBEDTLS_AES_C)
 void test_aes(void);
 #endif /* MBEDTLS_AES_C */
+#if defined(MBEDTLS_GCM_C)
+void test_aes_gcm(void);
+#endif /* MBEDTLS_GCM_C */
 #if defined(MBEDTLS_DES_C)
 void test_des(void);
 void test_des_cbc(void);
